@@ -1,0 +1,248 @@
+--Creating ACDOCA Table
+
+CREATE TABLE ACDOCA (
+    Ledger NVARCHAR(50),
+    CompanyCode NVARCHAR(50),
+    FiscalYear INT,
+    DocumentNumber NVARCHAR(50),
+    PostingItem INT,
+    ReferenceNumber NVARCHAR(50),
+    TransactionCurrency NVARCHAR(50)
+);
+
+INSERT INTO ACDOCA (Ledger, CompanyCode, FiscalYear, DocumentNumber, PostingItem, ReferenceNumber, TransactionCurrency)
+VALUES
+    ('L3', 'CC789', 2022, 'DOC004', 56, 'REF011', 'USD'),
+    ('L2', 'CC456', 2023, 'DOC002', 72, 'REF009', 'EUR'),
+    ('L1', 'CC234', 2023, 'DOC003', 28, 'REF007', 'GBP'),
+    ('L2', 'CC654', 2022, 'DOC001', 83, 'REF013', 'USD'),
+    ('L1', 'CC876', 2022, 'DOC005', 41, 'REF010', 'EUR'),
+    ('L3', 'CC567', 2023, 'DOC006', 95, 'REF002', 'USD'),
+    ('L2', 'CC890', 2022, 'DOC007', 13, 'REF014', 'GBP'),
+    ('L1', 'CC432', 2022, 'DOC008', 64, 'REF012', 'EUR'),
+    ('L2', 'CC765', 2023, 'DOC009', 29, 'REF003', 'USD'),
+    ('L3', 'CC987', 2023, 'DOC010', 52, 'REF008', 'GBP'),
+    ('L1', 'CC615', 2022, 'DOC011', 19, 'REF015', 'USD'),
+    ('L2', 'CC321', 2023, 'DOC012', 33, 'REF016', 'EUR'),
+    ('L3', 'CC876', 2022, 'DOC013', 77, 'REF017', 'GBP'),
+    ('L2', 'CC543', 2022, 'DOC014', 21, 'REF018', 'USD'),
+    ('L1', 'CC987', 2022, 'DOC015', 48, 'REF019', 'EUR'),
+    ('L3', 'CC765', 2023, 'DOC016', 60, 'REF020', 'USD'),
+    ('L2', 'CC234', 2022, 'DOC017', 14, 'REF021', 'GBP'),
+    ('L1', 'CC876', 2022, 'DOC018', 76, 'REF022', 'EUR'),
+    ('L2', 'CC543', 2023, 'DOC019', 35, 'REF023', 'USD'),
+    ('L3', 'CC890', 2023, 'DOC020', 44, 'REF024', 'GBP'),
+    ('L1', 'CC987', 2022, 'DOC021', 67, 'REF025', 'USD'),
+    ('L2', 'CC321', 2023, 'DOC022', 22, 'REF026', 'EUR'),
+    ('L3', 'CC234', 2022, 'DOC023', 91, 'REF027', 'GBP'),
+    ('L2', 'CC543', 2022, 'DOC024', 50, 'REF028', 'USD'),
+    ('L1', 'CC987', 2022, 'DOC025', 03, 'REF029', 'EUR'),
+    ('L3', 'CC765', 2023, 'DOC026', 18, 'REF030', 'USD'),
+    ('L2', 'CC234', 2022, 'DOC027', 68, 'REF031', 'GBP'),
+    ('L1', 'CC876', 2022, 'DOC028', 90, 'REF032', 'EUR'),
+    ('L2', 'CC543', 2023, 'DOC029', 38, 'REF033', 'USD'),
+    ('L3', 'CC890', 2023, 'DOC030', 59, 'REF034', 'GBP'),
+    ('L1', 'CC987', 2022, 'DOC031', 80, 'REF035', 'USD'),
+    ('L2', 'CC321', 2023, 'DOC032', 02, 'REF036', 'EUR'),
+    ('L3', 'CC234', 2022, 'DOC033', 47, 'REF037', 'GBP'),
+    ('L2', 'CC543', 2022, 'DOC034', 25, 'REF038', 'USD'),
+    ('L1', 'CC876', 2022, 'DOC035', 99, 'REF039', 'EUR'),
+    ('L3', 'CC765', 2023, 'DOC036', 10, 'REF040', 'USD'),
+    ('L2', 'CC234', 2022, 'DOC037', 73, 'REF041', 'GBP'),
+    ('L1', 'CC876', 2022, 'DOC038', 39, 'REF042', 'EUR'),
+    ('L2', 'CC543', 2023, 'DOC039', 58, 'REF043', 'USD'),
+    ('L3', 'CC890', 2023, 'DOC040', 86, 'REF044', 'GBP'),
+    ('L1', 'CC987', 2022, 'DOC041', 30, 'REF045', 'USD'),
+    ('L2', 'CC321', 2023, 'DOC042', 40, 'REF046', 'EUR'),
+    ('L3', 'CC234', 2022, 'DOC043', 78, 'REF047', 'GBP'),
+    ('L2', 'CC543', 2022, 'DOC044', 11, 'REF048', 'USD'),
+    ('L1', 'CC876', 2022, 'DOC045', 57, 'REF049', 'EUR'),
+    ('L3', 'CC765', 2023, 'DOC046', 31, 'REF050', 'USD'),
+    ('L2', 'CC234', 2022, 'DOC047', 81, 'REF051', 'GBP'),
+    ('L1', 'CC876', 2022, 'DOC048', 16, 'REF052', 'EUR'),
+    ('L2', 'CC543', 2023, 'DOC049', 69, 'REF053', 'USD'),
+    ('L3', 'CC890', 2023, 'DOC050', 05, 'REF054', 'GBP');
+
+CREATE TABLE CostCenter (
+    CompanyCode NVARCHAR(50),
+    SumAmountTransactionCurrency DECIMAL(18, 2),
+    SumAmountCompanyCodeCurrency DECIMAL(18, 2),
+    SumAmountGlobalCurrency DECIMAL(18, 2)
+);
+
+INSERT INTO CostCenter (CompanyCode, SumAmountTransactionCurrency, SumAmountCompanyCodeCurrency, SumAmountGlobalCurrency)
+VALUES
+    ('CC789', 2500.00, 2100.00, 1800.00),
+    ('CC456', 1850.00, 1500.00, 1600.00),
+    ('CC234', 3100.00, 2800.00, 2600.00),
+    ('CC654', 1670.00, 1400.00, 1500.00),
+    ('CC876', 1280.00, 1100.00, 1200.00),
+    ('CC567', 2900.00, 2500.00, 2400.00),
+    ('CC890', 1470.00, 1200.00, 1300.00),
+	('CC543', 1950.00, 1700.00, 1900.00),
+    ('CC987', 2800.00, 2400.00, 2200.00),
+    ('CC765', 1430.00, 1250.00, 1300.00),
+    ('CC234', 3180.00, 2900.00, 2700.00),
+    ('CC890', 1760.00, 1500.00, 1600.00),
+    ('CC987', 2920.00, 2550.00, 2400.00),
+    ('CC321', 1650.00, 1350.00, 1500.00),
+    ('CC234', 2970.00, 2600.00, 2400.00),
+    ('CC543', 1210.00, 1000.00, 1100.00),
+    ('CC890', 2560.00, 2100.00, 2300.00),
+    ('CC615', 1820.00, 1600.00, 1700.00),
+    ('CC321', 2380.00, 2050.00, 2200.00),
+    ('CC876', 1450.00, 1200.00, 1300.00),
+    ('CC765', 3050.00, 2700.00, 2500.00),
+    ('CC234', 1320.00, 1100.00, 1200.00),
+    ('CC543', 2690.00, 2350.00, 2200.00),
+    ('CC987', 1940.00, 1700.00, 1800.00),
+    ('CC890', 2230.00, 1900.00, 2100.00),
+    ('CC234', 1580.00, 1400.00, 1500.00),
+    ('CC876', 2810.00, 2400.00, 2300.00),
+    ('CC615', 1190.00, 1000.00, 1100.00),
+    ('CC765', 2740.00, 2350.00, 2200.00),
+    ('CC543', 2100.00, 1850.00, 2000.00),
+    ('CC987', 1490.00, 1300.00, 1400.00),
+    ('CC234', 3050.00, 2700.00, 2500.00),
+    ('CC890', 1600.00, 1400.00, 1500.00),
+    ('CC987', 2280.00, 2000.00, 2200.00),
+    ('CC321', 1750.00, 1500.00, 1600.00),
+    ('CC234', 1930.00, 1650.00, 1800.00),
+    ('CC543', 2820.00, 2400.00, 2300.00),
+    ('CC890', 1300.00, 1100.00, 1200.00),
+    ('CC615', 2430.00, 2150.00, 2300.00),
+    ('CC321', 1360.00, 1200.00, 1300.00),
+    ('CC876', 2580.00, 2200.00, 2100.00),
+    ('CC765', 1970.00, 1700.00, 1800.00),
+    ('CC234', 2120.00, 1850.00, 2000.00),
+    ('CC543', 1650.00, 1400.00, 1500.00),
+    ('CC987', 2950.00, 2500.00, 2400.00),
+    ('CC890', 1260.00, 1100.00, 1200.00),
+    ('CC987', 2660.00, 2300.00, 2200.00),
+    ('CC321', 1490.00, 1300.00, 1400.00),
+    ('CC234', 2810.00, 2400.00, 2300.00),
+    ('CC890', 1820.00, 1550.00, 1600.00),
+    ('CC234', 2180.00, 1850.00, 2000.00),
+    ('CC543', 1300.00, 1100.00, 1200.00),
+    ('CC987', 2540.00, 2200.00, 2100.00),
+    ('CC615', 2030.00, 1750.00, 1800.00),
+    ('CC321', 1750.00, 1500.00, 1600.00),
+    ('CC876', 2210.00, 1900.00, 2000.00),
+    ('CC765', 1850.00, 1600.00, 1700.00),
+    ('CC234', 1620.00, 1400.00, 1500.00);
+
+--Deleting 8 rows so there is an equal amount in both tables
+
+DELETE TOP(8) FROM CostCenter;
+
+
+--Joining the two tables ACDOCA and CostCenter
+
+SELECT DISTINCT
+    CC.CompanyCode,
+    CC.SumAmountTransactionCurrency,
+    CC.SumAmountCompanyCodeCurrency,
+    CC.SumAmountGlobalCurrency,
+    A.Ledger,
+    A.FiscalYear,
+    A.DocumentNumber,
+    A.PostingItem,
+    A.ReferenceNumber,
+    A.TransactionCurrency
+FROM
+    CostCenter CC
+JOIN
+    ACDOCA A ON CC.CompanyCode = A.CompanyCode;
+
+--Transaction Currency Count by Fiscal Year
+
+SELECT
+    A.FiscalYear,
+    A.TransactionCurrency,
+    COUNT(*) AS TransactionCount,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+GROUP BY
+    A.FiscalYear,
+    A.TransactionCurrency
+ORDER BY
+    A.FiscalYear, A.TransactionCurrency;
+
+
+--Top Companies by Total Global Amount:
+SELECT TOP 10
+    A.CompanyCode,
+    SUM(CC.SumAmountGlobalCurrency) AS TotalGlobalAmount
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+GROUP BY
+    A.CompanyCode
+ORDER BY
+    TotalGlobalAmount DESC;
+
+--Transaction Amount Trend Over Fiscal Years
+SELECT
+    A.FiscalYear,
+    A.CompanyCode,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+GROUP BY
+    A.FiscalYear,
+    A.CompanyCode
+ORDER BY
+    A.FiscalYear, A.CompanyCode;
+
+--Transaction Amount Distribution by Ledger and Fiscal Year
+SELECT
+    A.FiscalYear,
+    A.Ledger,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+GROUP BY
+    A.FiscalYear,
+    A.Ledger
+ORDER BY
+    A.FiscalYear, A.Ledger;
+
+--Transaction Amount Ratio by Transaction Currency
+SELECT
+    A.TransactionCurrency,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount,
+    SUM(CC.SumAmountTransactionCurrency) / SUM(SUM(CC.SumAmountTransactionCurrency)) OVER () AS TransactionAmountRatio
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+GROUP BY
+    A.TransactionCurrency
+ORDER BY
+    TotalTransactionAmount DESC;
+
+--Sum Amounts by Transaction Currency and Posting Item
+SELECT
+    A.FiscalYear,
+    A.CompanyCode,
+    A.PostingItem,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+GROUP BY
+    A.FiscalYear,
+    A.CompanyCode,
+    A.PostingItem
+ORDER BY
+    A.FiscalYear, A.CompanyCode, A.PostingItem;
+

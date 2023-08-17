@@ -153,24 +153,33 @@ FROM
     CostCenter CC
 JOIN
     ACDOCA A ON CC.CompanyCode = A.CompanyCode;
-
---Transaction Currency Count by Fiscal Year
-
-SELECT
-    A.FiscalYear,
-    A.TransactionCurrency,
-    COUNT(*) AS TransactionCount,
-    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
-FROM
-    ACDOCA A
-JOIN
-    CostCenter CC ON A.CompanyCode = CC.CompanyCode
-GROUP BY
+--Filtered Transaction Amounts by Fiscal Year and Transaction Currency (2022)
+SELECT DISTINCT
+    CC.CompanyCode,
+    CC.SumAmountTransactionCurrency,
     A.FiscalYear,
     A.TransactionCurrency
-ORDER BY
-    A.FiscalYear, A.TransactionCurrency;
+FROM
+    [ADOCA SQL Project].[dbo].[CostCenter] CC
+JOIN
+    [ADOCA SQL Project].[dbo].[ACDOCA] A ON CC.CompanyCode = A.CompanyCode
+WHERE
+    (A.TransactionCurrency = 'EUR' OR A.TransactionCurrency = 'GBP' OR A.TransactionCurrency = 'USD') AND
+    A.FiscalYear = '2022';
 
+--Filtered Transaction Amounts by Fiscal Year and Transaction Currency (2023)
+	SELECT DISTINCT
+    CC.CompanyCode,
+    CC.SumAmountTransactionCurrency,
+    A.FiscalYear,
+    A.TransactionCurrency
+FROM
+    [ADOCA SQL Project].[dbo].[CostCenter] CC
+JOIN
+    [ADOCA SQL Project].[dbo].[ACDOCA] A ON CC.CompanyCode = A.CompanyCode
+WHERE
+    (A.TransactionCurrency = 'EUR' OR A.TransactionCurrency = 'GBP' OR A.TransactionCurrency = 'USD') AND
+    A.FiscalYear = '2023';
 
 --Top Companies by Total Global Amount:
 SELECT TOP 10
@@ -199,21 +208,6 @@ GROUP BY
     A.CompanyCode
 ORDER BY
     A.FiscalYear, A.CompanyCode;
-
---Transaction Amount Distribution by Ledger and Fiscal Year
-SELECT
-    A.FiscalYear,
-    A.Ledger,
-    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
-FROM
-    ACDOCA A
-JOIN
-    CostCenter CC ON A.CompanyCode = CC.CompanyCode
-GROUP BY
-    A.FiscalYear,
-    A.Ledger
-ORDER BY
-    A.FiscalYear, A.Ledger;
 
 --Transaction Amount Ratio by Transaction Currency
 SELECT
@@ -246,3 +240,5 @@ GROUP BY
 ORDER BY
     A.FiscalYear, A.CompanyCode, A.PostingItem;
 
+
+ 

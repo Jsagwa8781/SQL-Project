@@ -153,51 +153,90 @@ FROM
     CostCenter CC
 JOIN
     ACDOCA A ON CC.CompanyCode = A.CompanyCode;
---Filtered Transaction Amounts by Fiscal Year and Transaction Currency (2022)
+
+--Transaction Amounts by Fiscal Year and Transaction Currency (2022)
 SELECT DISTINCT
     CC.CompanyCode,
     CC.SumAmountTransactionCurrency,
     A.FiscalYear,
     A.TransactionCurrency
 FROM
-    [ADOCA SQL Project].[dbo].[CostCenter] CC
+    CostCenter CC
 JOIN
-    [ADOCA SQL Project].[dbo].[ACDOCA] A ON CC.CompanyCode = A.CompanyCode
+    ACDOCA A ON CC.CompanyCode = A.CompanyCode
 WHERE
     (A.TransactionCurrency = 'EUR' OR A.TransactionCurrency = 'GBP' OR A.TransactionCurrency = 'USD') AND
     A.FiscalYear = '2022';
 
---Filtered Transaction Amounts by Fiscal Year and Transaction Currency (2023)
+--Transaction Amounts by Fiscal Year and Transaction Currency (2023)
 	SELECT DISTINCT
     CC.CompanyCode,
     CC.SumAmountTransactionCurrency,
     A.FiscalYear,
     A.TransactionCurrency
 FROM
-    [ADOCA SQL Project].[dbo].[CostCenter] CC
+    CostCenter CC
 JOIN
-    [ADOCA SQL Project].[dbo].[ACDOCA] A ON CC.CompanyCode = A.CompanyCode
+    ACDOCA A ON CC.CompanyCode = A.CompanyCode
 WHERE
     (A.TransactionCurrency = 'EUR' OR A.TransactionCurrency = 'GBP' OR A.TransactionCurrency = 'USD') AND
     A.FiscalYear = '2023';
 
---Top Companies by Total Global Amount:
-SELECT TOP 10
+--Transaction Amount Distribution by Company Code and Transaction Currency:
+SELECT
     A.CompanyCode,
-    SUM(CC.SumAmountGlobalCurrency) AS TotalGlobalAmount
+    A.TransactionCurrency,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
 FROM
     ACDOCA A
 JOIN
     CostCenter CC ON A.CompanyCode = CC.CompanyCode
 GROUP BY
-    A.CompanyCode
+    A.CompanyCode,
+    A.TransactionCurrency
 ORDER BY
-    TotalGlobalAmount DESC;
+    A.CompanyCode, A.TransactionCurrency;
 
---Transaction Amount Trend Over Fiscal Years
+--Company Code Transaction Amount Share Over Fiscal Years (2022):
 SELECT
     A.FiscalYear,
     A.CompanyCode,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount,
+    SUM(CC.SumAmountTransactionCurrency) / SUM(SUM(CC.SumAmountTransactionCurrency)) OVER (PARTITION BY A.FiscalYear) AS TransactionAmountShare
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+WHERE
+    A.FiscalYear = '2022'
+GROUP BY
+    A.FiscalYear,
+    A.CompanyCode
+ORDER BY
+    A.FiscalYear, A.CompanyCode;
+
+--Company Code Transaction Amount Share Over Fiscal Years (2023):
+SELECT
+    A.FiscalYear,
+    A.CompanyCode,
+    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount,
+    SUM(CC.SumAmountTransactionCurrency) / SUM(SUM(CC.SumAmountTransactionCurrency)) OVER (PARTITION BY A.FiscalYear) AS TransactionAmountShare
+FROM
+    ACDOCA A
+JOIN
+    CostCenter CC ON A.CompanyCode = CC.CompanyCode
+WHERE
+    A.FiscalYear = '2023'
+GROUP BY
+    A.FiscalYear,
+    A.CompanyCode
+ORDER BY
+    A.FiscalYear, A.CompanyCode;
+
+--Transaction Amount Trend Over Fiscal Years by Ledger
+SELECT
+    A.FiscalYear,
+    A.Ledger,
     SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
 FROM
     ACDOCA A
@@ -205,13 +244,15 @@ JOIN
     CostCenter CC ON A.CompanyCode = CC.CompanyCode
 GROUP BY
     A.FiscalYear,
-    A.CompanyCode
+    A.Ledger
 ORDER BY
-    A.FiscalYear, A.CompanyCode;
+    A.FiscalYear, A.Ledger;
 
---Transaction Amount Ratio by Transaction Currency
+
+--Transaction Amount Ratio by Ledger and Fiscal Year
 SELECT
-    A.TransactionCurrency,
+    A.FiscalYear,
+    A.Ledger,
     SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount,
     SUM(CC.SumAmountTransactionCurrency) / SUM(SUM(CC.SumAmountTransactionCurrency)) OVER () AS TransactionAmountRatio
 FROM
@@ -219,26 +260,11 @@ FROM
 JOIN
     CostCenter CC ON A.CompanyCode = CC.CompanyCode
 GROUP BY
-    A.TransactionCurrency
+    A.FiscalYear,
+    A.Ledger
 ORDER BY
-    TotalTransactionAmount DESC;
+    A.FiscalYear, A.Ledger;
 
---Sum Amounts by Transaction Currency and Posting Item
-SELECT
-    A.FiscalYear,
-    A.CompanyCode,
-    A.PostingItem,
-    SUM(CC.SumAmountTransactionCurrency) AS TotalTransactionAmount
-FROM
-    ACDOCA A
-JOIN
-    CostCenter CC ON A.CompanyCode = CC.CompanyCode
-GROUP BY
-    A.FiscalYear,
-    A.CompanyCode,
-    A.PostingItem
-ORDER BY
-    A.FiscalYear, A.CompanyCode, A.PostingItem;
 
 
  

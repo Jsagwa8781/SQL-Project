@@ -29,21 +29,21 @@ The `CostCenter` table stores financial data related to company codes with the f
 
 - Rows are deleted from the `CostCenter` table to create an equal number of rows in both tables.
 
-## Data Visualization Queries
+## Data Analysis Queries 
 
-The following SQL queries provide insights for data visualization in Power BI:
+The following SQL queries provide insights to analyze the financial data stored in the ACDOCA and CostCenter tables:
 
-1. **Transaction Currency Count by Fiscal Year**: Counts and sums transaction amounts by fiscal year and transaction currency.
+1. **Joining Tables** A query that joins the ACDOCA and CostCenter tables, fetching data related to company codes, transaction amounts, and transaction details.
 
-2. **Top Companies by Total Global Amount**: Lists the top 10 companies by their total global amounts.
+2. **Transaction Amounts by Fiscal Year and Currency (2022 and 2023)** Two queries that filter and display transaction amounts based on fiscal year and specific currencies.
 
-3. **Transaction Amount Trend Over Fiscal Years**: Displays transaction amount trends over fiscal years and company codes.
+3. **Transaction Amount Distribution by Company Code and Currency** A query that calculates the total transaction amount for each company code and currency combination, providing insights into transaction trends.
 
-4. **Transaction Amount Distribution by Ledger and Fiscal Year**: Shows the distribution of transaction amounts by ledger and fiscal year.
+4. **Company Code Transaction Amount Share Over Fiscal Years (2022 and 2023)** Two queries that analyze the share of transaction amounts for each company code in specific fiscal years.
 
-5. **Transaction Amount Ratio by Transaction Currency**: Presents the transaction amount ratio by transaction currency.
+5. **Transaction Amount Trend Over Fiscal Years by Ledger** A query that displays the trend of transaction amounts over fiscal years, grouped by the ledger attribute.
 
-6. **Sum Amounts by Transaction Currency and Posting Item**: Summarizes transaction amounts by fiscal year, company code, and posting item.
+6. **Transaction Amount Ratio by Ledger and Fiscal Year** A query that calculates the ratio of transaction amounts for different ledgers in each fiscal year.
 
 ## Usage
 
